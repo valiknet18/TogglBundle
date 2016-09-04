@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="valiknet_toggl.client.class">Valiknet\TogglBundle\TogglClient</parameter>
+        <parameter key="valiknet_toggl.api.client.class">Valiknet\TogglBundle\Api\ClientApi</parameter>
+    </parameters>
+
+    <services>
+        <service id="valiknet_toggl.client" class="%valiknet_toggl.client.class%">
+            <argument>%valiknet_toggl.username%</argument>
+            <argument>%valiknet_toggl.password%</argument>
+            <argument>%valiknet_toggl.api_key%</argument>
+            <argument>%valiknet_toggl.debug%</argument>
+        </service>
+
+        <service id="valiknet_toggl.api.client" class="%valiknet_toggl.api.client.class%">
+            <call method="setTogglClient">
+                <argument type="service" id="valiknet_toggl.client" />
+            </call>
+        </service>
+    </services>
+
+    <!--
+
+    <services>
+        <service id="valiknet.toggl.example" class="%valiknet.toggl.example.class%">
+            <argument type="service" id="service_id" />
+            <argument>plain_value</argument>
+            <argument>%parameter_name%</argument>
+            <call method="setService">
+                <argument type="service" id="service_id" />
+            </call>
+            <tag name="twig.extension" />
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
+        </service>
+    </services>
+    -->
+
+
+</container>

@@ -1,3 +1,0 @@
-toggl_homepage:
-    path:     /
-    defaults: { _controller: TogglBundle:Default:index }
